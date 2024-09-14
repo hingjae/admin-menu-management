@@ -4,7 +4,9 @@ CREATE TABLE `menu`
     `name` varchar(255) not null,
     `parent_id` int,
     `order` int,
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`),
+    CONSTRAINT fk_parent_menu
+        FOREIGN KEY (`parent_id`) REFERENCES `menu` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `user`

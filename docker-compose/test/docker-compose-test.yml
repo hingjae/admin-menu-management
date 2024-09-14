@@ -5,7 +5,7 @@ services:
     image: mysql:8.0.30
     volumes:
       - ../db/conf.d:/etc/mysql/conf.d
-      - ../db/initdb.d:/docker-entrypoint-initdb.d
+      - ../db/test-init.d:/docker-entrypoint-initdb.d
     ports:
       - "33060:3306"
     environment:
