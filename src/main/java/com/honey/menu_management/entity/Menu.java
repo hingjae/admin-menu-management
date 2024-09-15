@@ -1,5 +1,6 @@
 package com.honey.menu_management.entity;
 
+import com.honey.menu_management.service.MenuModify;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -19,4 +20,8 @@ public class Menu {
     private String name;
 
     private Integer order;
+
+    public void modify(MenuModify menuModify) {
+
+    }
 }

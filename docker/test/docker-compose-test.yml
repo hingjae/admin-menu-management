@@ -1,13 +1,13 @@
 version: '3.8'
 services:
   mysql:
-    container_name: menu_management_local
+    container_name: menu_management_test
     image: mysql:8.0.30
     volumes:
       - ../db/conf.d:/etc/mysql/conf.d
-      - ../db/local-init.d:/docker-entrypoint-initdb.d
+      - ../db/test-init.d:/docker-entrypoint-initdb.d
     ports:
-      - "3306:3306"
+      - "33060:3306"
     environment:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_USER=${MYSQL_USER}

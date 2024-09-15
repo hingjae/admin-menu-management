@@ -1,3 +1,5 @@
+use menu_management;
+
 CREATE TABLE `menu`
 (
     `id` int not null,
