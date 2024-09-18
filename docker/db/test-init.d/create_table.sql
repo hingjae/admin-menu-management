@@ -1,11 +1,9 @@
-use menu_management;
-
 CREATE TABLE `menu`
 (
-    `id` int not null,
+    `id` int not null AUTO_INCREMENT,
     `name` varchar(255) not null,
     `parent_id` int,
-    `order` int,
+    `menu_order` int,
     PRIMARY KEY (`id`),
     CONSTRAINT fk_parent_menu
         FOREIGN KEY (`parent_id`) REFERENCES `menu` (`id`)
