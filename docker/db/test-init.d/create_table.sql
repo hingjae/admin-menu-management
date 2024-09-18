@@ -12,7 +12,7 @@ CREATE TABLE `menu`
 CREATE TABLE `user`
 (
     `id`     varchar(255) NOT NULL,
-    `password`   varchar(50) NOT NULL,
+    `password`   varchar(255) NOT NULL,
     `authorities` varchar(50) NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
