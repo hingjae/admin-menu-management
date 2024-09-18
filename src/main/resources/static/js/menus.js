@@ -6,7 +6,7 @@ const getMenuTree = () => {
             console.log(response);
         },
         error: (error) => {
-            console.log(error);
+            window.location.href = error.responseJSON.loginUrl;
         }
     });
 }

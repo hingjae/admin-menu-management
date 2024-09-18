@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/dist/themes/default/style.css" />
+    <link rel="stylesheet" type="text/css" href="/css/top-bar.css">
     <title>Title</title>
 </head>
 <body>
+<div th:replace="~{fragment/top-bar :: topbar}"></div>
 <div id="menuTree">
 </div>
 

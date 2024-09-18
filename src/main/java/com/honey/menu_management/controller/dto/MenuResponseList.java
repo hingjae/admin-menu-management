@@ -1,4 +1,4 @@
-package com.honey.menu_management.controller;
+package com.honey.menu_management.controller.dto;
 
 import com.honey.menu_management.entity.Menu;
 import lombok.Builder;
