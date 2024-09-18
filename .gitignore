@@ -37,3 +37,5 @@ out/
 .vscode/
 src/test/resources/application-test.yml
 .env
+src/main/resources/static/dist
+src/main/resources/static/js/jquery-3.7.1.min.js
