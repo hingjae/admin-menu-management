@@ -2,10 +2,7 @@ package com.honey.menu_management.entity;
 
 import com.honey.menu_management.service.MenuModify;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +23,7 @@ public class Menu {
 
     private Integer menuOrder;
 
+    @Setter
     @OneToMany(mappedBy = "parent")
     private List<Menu> subMenus = new ArrayList<>();
 
@@ -40,5 +38,9 @@ public class Menu {
         this.name = name;
         this.menuOrder = menuOrder;
         this.subMenus = subMenus;
+    }
+
+    public boolean isRoot() {
+        return parent == null;
     }
 }
