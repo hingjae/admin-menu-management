@@ -4,6 +4,7 @@ CREATE TABLE `menu`
     `name` varchar(255) not null,
     `parent_id` int,
     `menu_order` int,
+    `icon` varchar(255),
     PRIMARY KEY (`id`),
     CONSTRAINT fk_parent_menu
         FOREIGN KEY (`parent_id`) REFERENCES `menu` (`id`)
