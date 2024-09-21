@@ -3,17 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/dist/themes/default/style.css" />
-    <link rel="stylesheet" type="text/css" href="/css/top-bar.css">
-    <style>
-        #menuTree {
-            margin-top: 50px; /* topbar의 높이에 맞춰 값을 조정하세요 */
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="/css/menus.css">
     <title>Title</title>
 </head>
-<body>
-<div th:replace="~{fragment/top-bar :: topbar}"></div>
-<div id="menuTree">
+<div th:replace="~{fragment/top-bar :: topbar}" class="top-bar">
+    <h1>Menu Management</h1>
+</div>
+
+<div class="container">
+    <!-- Menu Tree Panel -->
+    <div class="panel" id="menuTreePanel">
+        <h2>Menu Tree</h2>
+        <div id="menuTree"></div>
+    </div>
+
+    <!-- Menu Details Panel -->
+    <div class="panel" id="menuDetails">
+        <h2>Menu Details</h2>
+        <p>Select a menu item to view details.</p>
+        <!-- 트리의 요소를 클릭했을 때 세부 정보를 여기에 표시합니다 -->
+    </div>
 </div>
 
 <script src="/js/jquery-3.7.1.min.js"></script>

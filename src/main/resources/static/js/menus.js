@@ -4,7 +4,6 @@ const getMenuTree = () => {
         method: 'GET',
         contentType: 'application/json',
         success: (response) => {
-            console.log(response);
             drawMenuTree(response.data);
         },
         error: (error) => {
@@ -34,6 +33,7 @@ const drawMenuTree = (data) => {
             dragAndDrop(data.node.id, data.parent, data.position, data.node.parents.length, data.old_parent);
         });
 }
+
 $(document).ready(() => {
     getMenuTree();
 });
