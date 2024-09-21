@@ -1,11 +1,14 @@
 package com.honey.menu_management.api;
 
+import com.honey.menu_management.api.dto.MenuDetailResponse;
 import com.honey.menu_management.api.dto.MenuResponse;
 import com.honey.menu_management.api.dto.HierarchyMenuSetResponse;
 import com.honey.menu_management.api.dto.TreeJsMenuResponse;
+import com.honey.menu_management.entity.Menu;
 import com.honey.menu_management.service.MenuService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -29,5 +32,12 @@ public class MenuRestController {
                 .toList();
 
         return ApiResponse.ok(menus);
+    }
+
+    @GetMapping("/api/menus/{menuId}")
+    public ApiResponse<MenuDetailResponse> getMenuById(@PathVariable("menuId") Integer menuId) {
+        MenuDetailResponse menu = MenuDetailResponse.from(menuService.findById(menuId));
+
+        return ApiResponse.ok(menu);
     }
 }

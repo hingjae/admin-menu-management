@@ -36,6 +36,7 @@ public class MenuResponse implements Comparable<MenuResponse> {
                 .parentMenuId(menu.getParent() != null ? menu.getParent().getId() : null)
                 .text(menu.getName())
                 .menuOrder(menu.getMenuOrder())
+                .icon(menu.getIcon())
                 .subMenus(new TreeSet<>())
                 .build();
     }
