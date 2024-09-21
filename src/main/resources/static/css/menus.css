@@ -81,3 +81,47 @@ button:active {
     bottom: 20px;
     right: 20px;
 }
+
+/* Menu Details 패널 스타일 추가 */
+#menuDetails {
+    padding: 20px;
+    border: 1px solid #dcdcdc;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#menuDetails h2 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #e1e1e1;
+    padding-bottom: 10px;
+}
+
+#menuDetails p {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 50px;
+}
+
+#menuDetails p strong {
+    color: #333;
+    margin-right: 10px;
+}
+
+/* Menu Details의 텍스트 스타일 */
+#menuDetails span {
+    color: #007bff;
+    font-weight: bold;
+}
+
+/* 반응형 스타일 추가 */
+@media (max-width: 768px) {
+    #menuDetails {
+        font-size: 12px;
+    }
+
+    #menuDetails h2 {
+        font-size: 16px;
+    }
+}

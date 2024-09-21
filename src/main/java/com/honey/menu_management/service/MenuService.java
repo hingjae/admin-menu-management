@@ -23,7 +23,7 @@ public class MenuService {
     }
 
     public Menu findById(Integer id) {
-        return menuRepository.findById(id)
+        return menuRepository.findByIdWithParent(id)
                 .orElseThrow(EntityNotFoundException::new);
     }
 
@@ -34,7 +34,7 @@ public class MenuService {
 
     @Transactional
     public void modify(Integer id, MenuModify menuModify) {
-        Menu menu = menuRepository.findById(id)
+        Menu menu = menuRepository.findByIdWithParent(id)
                 .orElseThrow(EntityNotFoundException::new);
 
         menu.modify(menuModify);

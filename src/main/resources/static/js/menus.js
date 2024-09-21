@@ -17,10 +17,10 @@ const drawMenuTree = (data) => {
         'core': {
             'animation': 0,
             'themes': {
-                "variant" : "large",
+                "variant": "large",
             },
             'data': data,
-            "check_callback" : true
+            "check_callback": true
         },
         "types": {
             'default': {
@@ -31,8 +31,39 @@ const drawMenuTree = (data) => {
     })
 }
 
+const getMenuInfo = (menuId) => {
+    $.ajax({
+        url: `/api/menus/${menuId}`,
+        method: 'GET',
+        contentType: 'application/json',
+        success: function (json) {
+            drawMenuInfo(json.data);
+        },
+        error: function (error) {
+            console.error(error);
+        },
+    });
+}
+
+const drawMenuInfo = (menuDetail) => {
+    $('#menuId').text(menuDetail.id || 'N/A');
+    $('#parentMenuName').text(menuDetail.parentMenuName || 'N/A');
+    $('#menuName').text(menuDetail.name || 'N/A');
+    $('#menuOrder').text(menuDetail.menuOrder || 'N/A');
+    $('#menuIcon').text(menuDetail.icon || 'N/A');
+
+    $('#defaultMessage').hide();
+}
+
 $(document).ready(() => {
     getMenuTree();
-    $('#treeExpandBtn').on('click', function () {$('#menuTree').jstree('open_all');});
-    $('#treeCollapseBtn').on('click', function () {$('#menuTree').jstree('close_all');});
+    $('#treeExpandBtn').on('click', () => {
+        $('#menuTree').jstree('open_all');
+    });
+    $('#treeCollapseBtn').on('click', () => {
+        $('#menuTree').jstree('close_all');
+    });
+    $('#menuTree').on("select_node.jstree", (e, _data) => {
+        getMenuInfo(_data.node.id);
+    });
 });
