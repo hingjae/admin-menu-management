@@ -23,6 +23,8 @@ public class Menu {
 
     private Integer menuOrder;
 
+    private String icon;
+
     @OneToMany(mappedBy = "parent")
     private List<Menu> subMenus = new ArrayList<>();
 
@@ -31,15 +33,12 @@ public class Menu {
     }
 
     @Builder
-    public Menu(Integer id, Menu parent, String name, Integer menuOrder, List<Menu> subMenus) {
+    public Menu(Integer id, Menu parent, String name, Integer menuOrder, String icon, List<Menu> subMenus) {
         this.id = id;
         this.parent = parent;
         this.name = name;
         this.menuOrder = menuOrder;
+        this.icon = icon;
         this.subMenus = subMenus;
-    }
-
-    public boolean isRoot() {
-        return parent == null;
     }
 }

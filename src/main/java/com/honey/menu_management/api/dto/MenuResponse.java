@@ -16,14 +16,17 @@ public class MenuResponse implements Comparable<MenuResponse> {
 
     private final Integer menuOrder;
 
+    private final String icon;
+
     private final Set<MenuResponse> children;
 
     @Builder
-    public MenuResponse(Integer id, Integer parentMenuId, String text, Integer menuOrder, Set<MenuResponse> subMenus) {
+    public MenuResponse(Integer id, Integer parentMenuId, String text, Integer menuOrder, String icon, Set<MenuResponse> subMenus) {
         this.id = id;
         this.parentMenuId = parentMenuId;
         this.text = text;
         this.menuOrder = menuOrder;
+        this.icon = icon;
         this.children = subMenus;
     }
 
@@ -35,14 +38,6 @@ public class MenuResponse implements Comparable<MenuResponse> {
                 .menuOrder(menu.getMenuOrder())
                 .subMenus(new TreeSet<>())
                 .build();
-    }
-
-    public boolean isRoot() {
-        return parentMenuId == null;
-    }
-
-    public boolean isNotRoot() {
-        return parentMenuId != null;
     }
 
     @Override
