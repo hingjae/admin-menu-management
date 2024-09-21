@@ -33,4 +33,6 @@ const drawMenuTree = (data) => {
 
 $(document).ready(() => {
     getMenuTree();
+    $('#treeExpandBtn').on('click', function () {$('#menuTree').jstree('open_all');});
+    $('#treeCollapseBtn').on('click', function () {$('#menuTree').jstree('close_all');});
 });
