@@ -37,19 +37,6 @@ body {
     padding-top: 60px;
 }
 
-/* 상세 조회 패널 스타일 */
-#menuDetails {
-    font-size: 14px;
-}
-
-#menuDetails h2 {
-    margin-top: 0;
-}
-
-#menuDetails p {
-    margin: 5px 0;
-}
-
 /* 추가된 버튼 스타일 */
 button {
     background-color: #007bff;
@@ -84,12 +71,17 @@ button:active {
 
 /* Menu Details 패널 스타일 추가 */
 #menuDetails {
+    /*width: 400px;       !* 고정된 너비 *!*/
+    height: 400px;      /* 고정된 높이 */
+    font-size: 14px;
     padding: 20px;
     border: 1px solid #dcdcdc;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;   /* 세로 스크롤 추가 (내용이 넘칠 경우) */
 }
 
 #menuDetails h2 {
+    margin-top: 0;
     font-size: 18px;
     color: #333;
     margin-bottom: 15px;
@@ -124,4 +116,18 @@ button:active {
     #menuDetails h2 {
         font-size: 16px;
     }
+}
+
+.menu-tree-header {
+    display: flex;
+    justify-content: space-between; /* 좌우로 아이템 배치 */
+    align-items: center;
+    margin-top: 10px;
+    padding: 0;
+}
+
+.menu-count {
+    font-size: 14px;
+    color: #555;
+    margin-left: 5px;
 }

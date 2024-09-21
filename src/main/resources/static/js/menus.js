@@ -5,6 +5,8 @@ const getMenuTree = () => {
         contentType: 'application/json',
         success: (response) => {
             drawMenuTree(response.data);
+            const menuCount = response.data.length;
+            $('#menuCount').text(`Total Counts (${menuCount})`);
         },
         error: (error) => {
             console.error("Authentication Failure");
@@ -57,13 +59,7 @@ const drawMenuInfo = (menuDetail) => {
 
 $(document).ready(() => {
     getMenuTree();
-    $('#treeExpandBtn').on('click', () => {
-        $('#menuTree').jstree('open_all');
-    });
-    $('#treeCollapseBtn').on('click', () => {
-        $('#menuTree').jstree('close_all');
-    });
-    $('#menuTree').on("select_node.jstree", (e, _data) => {
-        getMenuInfo(_data.node.id);
-    });
+    $('#treeExpandBtn').on('click', () => {$('#menuTree').jstree('open_all');});
+    $('#treeCollapseBtn').on('click', () => {$('#menuTree').jstree('close_all');});
+    $('#menuTree').on("select_node.jstree", (e, _data) => {getMenuInfo(_data.node.id);});
 });
