@@ -23,7 +23,6 @@ public class Menu {
 
     private Integer menuOrder;
 
-    @Setter
     @OneToMany(mappedBy = "parent")
     private List<Menu> subMenus = new ArrayList<>();
 

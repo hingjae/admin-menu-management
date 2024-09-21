@@ -1,7 +1,7 @@
 package com.honey.menu_management.service;
 
-import com.honey.menu_management.controller.dto.MenuResponse;
-import com.honey.menu_management.controller.dto.HierarchyMenuSetResponse;
+import com.honey.menu_management.api.dto.MenuResponse;
+import com.honey.menu_management.api.dto.HierarchyMenuSetResponse;
 import com.honey.menu_management.entity.Menu;
 import com.honey.menu_management.repository.MenuRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -65,38 +65,38 @@ class MenuServiceTest {
                 .containsExactlyInAnyOrder("여성 의류", "남성 의류", "액세서리");;
 
         MenuResponse womenClothing = getParentMenu(hierarchyMenuSetResponse.getData(), "여성 의류");
-        assertThat(womenClothing.getSubMenus())
+        assertThat(womenClothing.getChildren())
                 .hasSize(2)
                 .extracting("text")
                 .containsExactlyInAnyOrder("아우터", "상의");
 
         MenuResponse menClothing = getParentMenu(hierarchyMenuSetResponse.getData(), "남성 의류");
-        assertThat(menClothing.getSubMenus())
+        assertThat(menClothing.getChildren())
                 .hasSize(2)
                 .extracting("text")
                 .containsExactlyInAnyOrder("아우터", "바지");
 
 
         MenuResponse accessories = getParentMenu(hierarchyMenuSetResponse.getData(), "액세서리");
-        assertThat(accessories.getSubMenus())
+        assertThat(accessories.getChildren())
                 .hasSize(2)
                 .extracting("text")
                 .containsExactlyInAnyOrder("가방", "신발");
 
-        MenuResponse outer = getParentMenu(womenClothing.getSubMenus(), "아우터");
-        assertThat(outer.getSubMenus())
+        MenuResponse outer = getParentMenu(womenClothing.getChildren(), "아우터");
+        assertThat(outer.getChildren())
                 .hasSize(2)
                 .extracting("text")
                 .containsExactlyInAnyOrder("코트", "자켓");
 
-        MenuResponse menOuter = getParentMenu(menClothing.getSubMenus(), "아우터");
-        assertThat(menOuter.getSubMenus())
+        MenuResponse menOuter = getParentMenu(menClothing.getChildren(), "아우터");
+        assertThat(menOuter.getChildren())
                 .hasSize(2)
                 .extracting("text")
                 .containsExactlyInAnyOrder("코트", "패딩");
 
-        MenuResponse shoes = getParentMenu(accessories.getSubMenus(), "신발");
-        assertThat(shoes.getSubMenus())
+        MenuResponse shoes = getParentMenu(accessories.getChildren(), "신발");
+        assertThat(shoes.getChildren())
                 .hasSize(3)
                 .extracting("text")
                 .containsExactlyInAnyOrder("스니커즈", "샌들", "부츠");

@@ -1,11 +1,10 @@
-package com.honey.menu_management.controller.dto;
+package com.honey.menu_management.api.dto;
 
 import com.honey.menu_management.entity.Menu;
 import lombok.Builder;
 import lombok.Getter;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Getter
 public class MenuResponse implements Comparable<MenuResponse> {

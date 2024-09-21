@@ -1,6 +1,6 @@
 const getMenuTree = () => {
     $.ajax({
-        url: '/api/menus',
+        url: '/api/menu-tree',
         method: 'GET',
         contentType: 'application/json',
         success: (response) => {
@@ -29,9 +29,6 @@ const drawMenuTree = (data) => {
         },
         'plugins': ['dnd', "types", "state"]  // drag-and-drop 플러그인 활성화
     })
-        .on('move_node.jstree', function (e, data) {
-            dragAndDrop(data.node.id, data.parent, data.position, data.node.parents.length, data.old_parent);
-        });
 }
 
 $(document).ready(() => {

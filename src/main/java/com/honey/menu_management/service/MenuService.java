@@ -18,6 +18,10 @@ public class MenuService {
         return menuRepository.findAll();
     }
 
+    public List<Menu> findAllByOrder() {
+        return menuRepository.findAllByOrderByMenuOrder();
+    }
+
     public Menu findById(Integer id) {
         return menuRepository.findById(id)
                 .orElseThrow(EntityNotFoundException::new);

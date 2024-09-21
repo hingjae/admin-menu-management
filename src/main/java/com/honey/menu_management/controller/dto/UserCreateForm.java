@@ -2,6 +2,7 @@ package com.honey.menu_management.controller.dto;
 
 import com.honey.menu_management.entity.Authority;
 import com.honey.menu_management.entity.User;
+import lombok.Builder;
 import lombok.Getter;
 
 import java.util.Set;
@@ -12,6 +13,7 @@ public class UserCreateForm {
 
     private final String password;
 
+    @Builder
     public UserCreateForm(String username, String password) {
         this.username = username;
         this.password = password;
