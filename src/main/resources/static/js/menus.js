@@ -57,9 +57,15 @@ const drawMenuInfo = (menuDetail) => {
     $('#defaultMessage').hide();
 }
 
+const dragAndDrop = (e, data) => {
+    console.log(e);
+    console.log(data);
+}
+
 $(document).ready(() => {
     getMenuTree();
     $('#treeExpandBtn').on('click', () => {$('#menuTree').jstree('open_all');});
     $('#treeCollapseBtn').on('click', () => {$('#menuTree').jstree('close_all');});
     $('#menuTree').on("select_node.jstree", (e, _data) => {getMenuInfo(_data.node.id);});
+    $('#menuTree').on('move_node.jstree', (e, data) => {dragAndDrop(e, data)});
 });
