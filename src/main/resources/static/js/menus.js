@@ -2,7 +2,6 @@ const getMenuTree = () => {
     $.ajax({
         url: '/api/menu-tree',
         method: 'GET',
-        contentType: 'application/json',
         success: (response) => {
             drawMenuTree(response.data);
             const menuCount = response.data.length;
@@ -37,7 +36,6 @@ const getMenuInfo = (menuId) => {
     $.ajax({
         url: `/api/menus/${menuId}`,
         method: 'GET',
-        contentType: 'application/json',
         success: function (json) {
             drawMenuInfo(json.data);
         },
@@ -58,8 +56,29 @@ const drawMenuInfo = (menuDetail) => {
 }
 
 const dragAndDrop = (e, data) => {
-    console.log(e);
-    console.log(data);
+    console.log(`id : ${data.node.id}, oldParent : ${data.old_parent}, parent : ${data.parent}, oldPosition : ${data.old_position}, position : ${data.position}`);
+
+    let request = JSON.stringify({
+        "id": data.node.id,
+        "oldParent": data.old_parent,
+        "parent": data.parent,
+        "oldPosition": data.old_position,
+        "position": data.position,
+    });
+
+    $.ajax({
+        url: `/api/menus/${data.node.id}`,
+        method: 'PATCH',
+        contentType: 'application/json', //요청이 json형식으로 전송된다는 것을 알리는 헤더.
+        data: request,
+        success: function (response) {
+            console.log(response);
+            // window.location.href = "/admin/menus";
+        },
+        error: function (error) {
+            console.error(error)
+        },
+    })
 }
 
 $(document).ready(() => {

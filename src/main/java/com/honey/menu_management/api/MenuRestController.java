@@ -4,15 +4,16 @@ import com.honey.menu_management.api.dto.HierarchyMenuSetResponse;
 import com.honey.menu_management.api.dto.MenuDetailResponse;
 import com.honey.menu_management.api.dto.MenuResponse;
 import com.honey.menu_management.api.dto.TreeJsMenuResponse;
+import com.honey.menu_management.controller.dto.DragAndDropRequest;
 import com.honey.menu_management.service.MenuService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Set;
 
+@Slf4j
 @RequiredArgsConstructor
 @RestController
 public class MenuRestController {
@@ -38,5 +39,10 @@ public class MenuRestController {
         MenuDetailResponse menu = MenuDetailResponse.from(menuService.findById(menuId));
 
         return ApiResponse.ok(menu);
+    }
+
+    @PatchMapping("/api/menus/{menuId}")
+    public ApiResponse<Integer> dragAndDropMenu(@PathVariable("menuId") Integer menuId, @RequestBody DragAndDropRequest request) {
+        return ApiResponse.ok(menuId);
     }
 }
