@@ -2,7 +2,6 @@ package com.honey.menu_management.security;
 
 import com.honey.menu_management.repository.UserRepository;
 import com.honey.menu_management.security.dto.CustomUserDetails;
-import com.honey.menu_management.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -32,6 +31,9 @@ public class SecurityConfig {
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                         .invalidateHttpSession(true)
                         .permitAll())
+                .csrf(csrf -> csrf
+                        .ignoringRequestMatchers("/api/**")
+                )
                 .build();
     }
 
