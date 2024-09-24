@@ -18,36 +18,5 @@ public interface MenuRepository extends JpaRepository<Menu, Integer>, MenuBulkRe
             " where m.id = :id")
     Optional<Menu> findByIdWithParent(@Param("id") Integer id);
 
-    //TODO parentId가 null인 경우 고려하기
-    @Modifying
-    @Query("update Menu m" +
-            " set m.menuOrder = m.menuOrder - 1" +
-            " where m.parent.id = :parentId" +
-            " and m.menuOrder between :oldOrder and :newOrder")
-    int bulkOrderMinus(@Param("parentId") Integer parentId,
-                       @Param("oldOrder") Integer oldOrder,
-                       @Param("newOrder") Integer newOrder);
-
-    @Modifying
-    @Query("update Menu m" +
-            " set m.menuOrder = m.menuOrder + 1" +
-            " where m.parent.id = :parentId" +
-            " and m.menuOrder between :newOrder and :oldOrder")
-    int bulkOrderPlus(@Param("parentId") Integer parentId,
-                      @Param("oldOrder") Integer oldOrder,
-                      @Param("newOrder") Integer newOrder);
-
-    @Modifying
-    @Query("update Menu m" +
-            " set m.menuOrder = m.menuOrder - 1" +
-            " where m.parent.id = :oldParent" +
-            " and m.menuOrder > :oldOrder")
-    int bulkOrderMinus(@Param("oldParent") Integer oldParent, @Param("oldOrder") Integer oldOrder);
-
-    @Modifying
-    @Query("update Menu m" +
-            " set m.menuOrder = m.menuOrder + 1" +
-            " where m.parent.id = :newParent" +
-            " and m.menuOrder >= :newOrder")
-    int bulkOrderPlus(@Param("newParent") Integer newParent, @Param("newOrder") Integer newOrder);
+    List<Menu> findAllByParentIsNullOrderByMenuOrder();
 }

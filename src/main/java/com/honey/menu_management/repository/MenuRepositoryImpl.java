@@ -1,6 +1,5 @@
 package com.honey.menu_management.repository;
 
-import com.honey.menu_management.entity.QMenu;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +14,7 @@ public class MenuRepositoryImpl implements MenuBulkRepositoryCustom {
     public long bulkOrderMinusBetween(Integer parentId, Integer oldOrder, Integer newOrder) {
         return query
                 .update(menu)
-                .set(menu.menuOrder, menu.menuOrder.add(-1))
+                .set(menu.menuOrder, menu.menuOrder.subtract(1))
                 .where(
                         parentIdEq(parentId),
                         menu.menuOrder.between(oldOrder, newOrder)
@@ -39,7 +38,7 @@ public class MenuRepositoryImpl implements MenuBulkRepositoryCustom {
     public long bulkOrderMinusGreaterThan(Integer parentId, Integer order) {
         return query
                 .update(menu)
-                .set(menu.menuOrder, menu.menuOrder.add(-1))
+                .set(menu.menuOrder, menu.menuOrder.subtract(1))
                 .where(
                         parentIdEq(parentId),
                         menu.menuOrder.gt(order)
