@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 
 @RequiredArgsConstructor
 @Service
@@ -38,5 +39,30 @@ public class MenuService {
                 .orElseThrow(EntityNotFoundException::new);
 
         menu.modify(menuModify);
+    }
+
+    @Transactional
+    public void dragAndDrop(Integer id, Integer oldParentId, Integer newParentId, Integer oldOrder, Integer newOrder) {
+        if (Objects.equals(oldParentId, newParentId)) {
+            if (oldOrder > newOrder) {
+                menuRepository.bulkOrderPlusBetween(newParentId, oldOrder, newOrder);
+            } else {
+                menuRepository.bulkOrderMinusBetween(newParentId, oldOrder, newOrder);
+            }
+        } else {
+            menuRepository.bulkOrderMinusGreaterThan(oldParentId, oldOrder);
+            menuRepository.bulkOrderPlusLessThan(newParentId, newOrder);
+        }
+
+        Menu menu = menuRepository.findById(id)
+                .orElseThrow(EntityNotFoundException::new);
+
+        Menu parentMenu = null;
+        if (newParentId != null) {
+            parentMenu = menuRepository.findById(newParentId)
+                    .orElseThrow(EntityNotFoundException::new);
+        }
+
+        menu.dragAndDrop(parentMenu, newOrder);
     }
 }

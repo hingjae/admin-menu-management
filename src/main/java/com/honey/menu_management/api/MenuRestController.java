@@ -26,7 +26,7 @@ public class MenuRestController {
     }
 
     @GetMapping("/api/menu-tree")
-    public ApiResponse<List<TreeJsMenuResponse>> getMenuV2() {
+    public ApiResponse<List<TreeJsMenuResponse>> getMenuTree() {
         List<TreeJsMenuResponse> menus = menuService.findAllByOrder().stream()
                 .map(TreeJsMenuResponse::from)
                 .toList();
@@ -43,6 +43,10 @@ public class MenuRestController {
 
     @PatchMapping("/api/menus/{menuId}")
     public ApiResponse<Integer> dragAndDropMenu(@PathVariable("menuId") Integer menuId, @RequestBody DragAndDropRequest request) {
+        log.info("@@@@@@@@@@@@@@@@@@@@@@drag and drop start@@@@@@@@@@@@@@@@@@@@@@");
+        menuService.dragAndDrop(request.getId(), request.getOldParent(), request.getNewParent(), request.getOldOrder(), request.getNewOrder());
+        log.info("@@@@@@@@@@@@@@@@@@@@@@drag and drop end@@@@@@@@@@@@@@@@@@@@@@");
+
         return ApiResponse.ok(menuId);
     }
 }

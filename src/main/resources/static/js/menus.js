@@ -49,9 +49,8 @@ const drawMenuInfo = (menuDetail) => {
     $('#menuId').text(menuDetail.id || 'N/A');
     $('#parentMenuName').text(menuDetail.parentMenuName || 'N/A');
     $('#menuName').text(menuDetail.name || 'N/A');
-    $('#menuOrder').text(menuDetail.menuOrder || 'N/A');
+    $('#menuOrder').text(menuDetail.menuOrder ?? 'N/A');
     $('#menuIcon').text(menuDetail.icon || 'N/A');
-
     $('#defaultMessage').hide();
 }
 
@@ -60,10 +59,10 @@ const dragAndDrop = (e, data) => {
 
     let request = JSON.stringify({
         "id": data.node.id,
-        "oldParent": data.old_parent,
-        "parent": data.parent,
-        "oldPosition": data.old_position,
-        "position": data.position,
+        "oldParent": data.old_parent === "#" ? null : data.old_parent,
+        "newParent": data.parent === "#" ? null : data.parent,
+        "oldOrder": data.old_position,
+        "newOrder": data.position,
     });
 
     $.ajax({
@@ -72,8 +71,7 @@ const dragAndDrop = (e, data) => {
         contentType: 'application/json', //요청이 json형식으로 전송된다는 것을 알리는 헤더.
         data: request,
         success: function (response) {
-            console.log(response);
-            // window.location.href = "/admin/menus";
+            window.location.href = "/admin/menus";
         },
         error: function (error) {
             console.error(error)
