@@ -41,4 +41,9 @@ public class Menu {
         this.icon = icon;
         this.subMenus = subMenus;
     }
+
+    public void dragAndDrop(Menu parent, Integer newOrder) {
+        this.parent = parent;
+        this.menuOrder = newOrder;
+    }
 }
