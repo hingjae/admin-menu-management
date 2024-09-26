@@ -28,8 +28,9 @@ public class Menu {
     @OneToMany(mappedBy = "parent")
     private List<Menu> subMenus = new ArrayList<>();
 
-    public void modify(MenuModify menuModify) {
-
+    public void modify(String menuName, String menuIcon) {
+        this.name = menuName;
+        this.icon = menuIcon;
     }
 
     @Builder
@@ -45,5 +46,9 @@ public class Menu {
     public void dragAndDrop(Menu parent, Integer newOrder) {
         this.parent = parent;
         this.menuOrder = newOrder;
+    }
+
+    public void setOrder(Integer order) {
+        this.menuOrder = order;
     }
 }
