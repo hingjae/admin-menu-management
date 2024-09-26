@@ -78,15 +78,10 @@ button:active {
     /*width: 400px;       !* 고정된 너비 *!*/
     height: 400px;      /* 고정된 높이 */
     font-size: 14px;
-    padding: 20px;
     border: 1px solid #dcdcdc;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     overflow-y: auto;   /* 세로 스크롤 추가 (내용이 넘칠 경우) */
-}
-
-#menuDetails h2 {
     margin-top: 0;
-    font-size: 18px;
     color: #333;
     margin-bottom: 15px;
     border-bottom: 1px solid #e1e1e1;
@@ -134,4 +129,26 @@ button:active {
     font-size: 14px;
     color: #555;
     margin-left: 5px;
+}
+
+/* Flexbox layout for header */
+.menu-header {
+    display: flex;
+    justify-content: space-between; /* Space between h2 and button */
+    align-items: center; /* Align items vertically in the center */
+    margin-bottom: 15px; /* Add some margin below the header */
+}
+
+/* Button styling */
+#modifyMenuBtn {
+    padding: 8px 12px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#modifyMenuBtn:hover {
+    background-color: #0056b3;
 }

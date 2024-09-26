@@ -19,13 +19,17 @@
         </h2>
         <div id="menuTree"></div>
         <div class="btnDiv">
+            <button id="createMenuBtn" onclick="window.location.href='/admin/menus/create'">Create Menu</button>
             <button id="treeExpandBtn">Expand All</button>
             <button id="treeCollapseBtn">Collapse All</button>
         </div>
     </div>
 
     <div class="panel" id="menuDetails">
-        <h2>Menu Details</h2>
+        <div class="menu-header">
+            <h2>Menu Details</h2>
+            <button id="modifyMenuBtn" onclick="window.location.href='/admin/menus/modify'">Modify Menu</button>
+        </div>
         <p id="defaultMessage">Select a menu item to view details.</p>
         <p><strong>ID:</strong> <span id="menuId">N/A</span></p>
         <p><strong>Parent Menu:</strong> <span id="parentMenuName">N/A</span></p>

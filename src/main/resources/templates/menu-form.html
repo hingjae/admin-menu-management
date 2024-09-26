@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/menu-form.css">
+    <title>Title</title>
+</head>
+<body>
+<div th:replace="~{fragment/top-bar :: topbar}" class="top-bar">
+    <h1>Menu Management</h1>
+</div>
+
+<div class="container">
+    <div class="panel" id="menuCreatePanel">
+        <h2>Create New Menu</h2>
+<!--        <form th:object="${menuForm}" action="/admin/menus/create" method="POST" id="menuCreateForm">-->
+        <form th:object="${menuForm}" th:action="${isCreate} ? '/admin/menus/create' : '/admin/menus/' + ${menuId} + '/modify'" action="" method="POST" id="menuCreateForm">
+            <div class="form-group">
+                <label>Menu Name</label>
+                <input th:field="*{name}" type="text" class="form-control" placeholder="Enter menu name" required>
+            </div>
+
+            <div class="form-group">
+                <label>Menu Icon</label>
+                <input th:field="*{icon}" type="text" class="form-control" placeholder="Enter menu icon" required>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Save Menu</button>
+            </div>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

@@ -52,6 +52,8 @@ const drawMenuInfo = (menuDetail) => {
     $('#menuOrder').text(menuDetail.menuOrder ?? 'N/A');
     $('#menuIcon').text(menuDetail.icon || 'N/A');
     $('#defaultMessage').hide();
+
+    $('#modifyMenuBtn').attr('onclick', `window.location.href='/admin/menus/${menuDetail.id}/modify'`);
 }
 
 const dragAndDrop = (e, data) => {
