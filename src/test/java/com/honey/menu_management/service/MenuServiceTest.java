@@ -3,6 +3,7 @@ package com.honey.menu_management.service;
 import com.honey.menu_management.api.dto.MenuResponse;
 import com.honey.menu_management.api.dto.HierarchyMenuSetResponse;
 import com.honey.menu_management.controller.dto.DragAndDropRequest;
+import com.honey.menu_management.controller.dto.MenuForm;
 import com.honey.menu_management.entity.Menu;
 import com.honey.menu_management.repository.MenuRepository;
 import jakarta.persistence.EntityManager;
@@ -314,6 +315,32 @@ class MenuServiceTest {
                 .filter(menu -> menu.getText().equals(parentMenuName))
                 .findFirst()
                 .orElseThrow(AssertionError::new);
+    }
+
+    @Transactional
+    @DisplayName("메뉴를 생성하면 최상위 메뉴 맨 마지막 순서로 생성된다.")
+    @Test
+    public void givenMenuForm_whenCreateMenu_thenSuccess() {
+        createMenuInit();
+        MenuForm form = MenuForm.builder()
+                .name("가방")
+                .icon("fa-solid fa-mitten")
+                .build();
+
+        Menu menu = menuService.create(form.toEntity());
+
+        Menu findMenu = menuRepository.findById(menu.getId()).orElseThrow(EntityNotFoundException::new);
+
+        assertThat(findMenu.getName()).isEqualTo("가방");
+        assertThat(findMenu.getParent()).isNull();
+        assertThat(findMenu.getIcon()).isEqualTo("fa-solid fa-mitten");
+        assertThat(findMenu.getMenuOrder()).isEqualTo(3);
+    }
+
+    private void createMenuInit() {
+        Integer menu1Id = createAndSaveMenu("여성 의류", null, 2);
+        Integer menu2Id = createAndSaveMenu("남성 의류", null, 1);
+        Integer menu3Id = createAndSaveMenu("액세서리", null, 0);
     }
 
 }

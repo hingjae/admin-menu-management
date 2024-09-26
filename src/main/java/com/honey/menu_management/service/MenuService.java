@@ -30,15 +30,20 @@ public class MenuService {
 
     @Transactional
     public Menu create(Menu menu) {
+        Integer lastMenuOrder = menuRepository.findAllByParentIsNullOrderByMenuOrder()
+                .getLast()
+                .getMenuOrder();
+
+        menu.setOrder(lastMenuOrder + 1);
         return menuRepository.save(menu);
     }
 
     @Transactional
-    public void modify(Integer id, MenuModify menuModify) {
+    public void modify(Integer id, String menuName, String menuIcon) {
         Menu menu = menuRepository.findByIdWithParent(id)
                 .orElseThrow(EntityNotFoundException::new);
 
-        menu.modify(menuModify);
+        menu.modify(menuName, menuIcon);
     }
 
     @Transactional
