@@ -23,7 +23,7 @@ public class MenuRepositoryImpl implements MenuBulkRepositoryCustom {
     }
 
     @Override
-    public long bulkOrderPlusBetween(Integer parentId, Integer oldOrder, Integer newOrder) {
+    public long bulkOrderPlusBetween(Integer parentId, Integer newOrder, Integer oldOrder) {
         return query
                 .update(menu)
                 .set(menu.menuOrder, menu.menuOrder.add(1))

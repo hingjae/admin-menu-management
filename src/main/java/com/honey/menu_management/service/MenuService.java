@@ -50,7 +50,7 @@ public class MenuService {
     public void dragAndDrop(Integer id, Integer oldParentId, Integer newParentId, Integer oldOrder, Integer newOrder) {
         if (Objects.equals(oldParentId, newParentId)) {
             if (oldOrder > newOrder) {
-                menuRepository.bulkOrderPlusBetween(newParentId, oldOrder, newOrder);
+                menuRepository.bulkOrderPlusBetween(newParentId, newOrder, oldOrder);
             } else {
                 menuRepository.bulkOrderMinusBetween(newParentId, oldOrder, newOrder);
             }
@@ -68,6 +68,6 @@ public class MenuService {
                     .orElseThrow(EntityNotFoundException::new);
         }
 
-        menu.dragAndDrop(parentMenu, newOrder);
+        menu.setParentAndOrder(parentMenu, newOrder);
     }
 }
