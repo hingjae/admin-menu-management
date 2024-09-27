@@ -110,8 +110,8 @@ class MenuServiceTest {
     @DisplayName("드래그앤 드롭으로 메뉴를 수정한다. 루트에서 루트로 이동.")
     @Transactional
     @Test
-    public void dragAndDrop1() {
-        DragAndDropRequest request = dragAndDropMenuInit();
+    public void setParentAndOrder1() {
+        DragAndDropRequest request = setParentAndOrderMenuInit();
 
         menuService.dragAndDrop(request.getId(), request.getOldParent(), request.getNewParent(), request.getOldOrder(), request.getNewOrder());
 
@@ -121,7 +121,7 @@ class MenuServiceTest {
                 .containsExactly("여성 의류", "액세서리", "남성 의류");
     }
 
-    private DragAndDropRequest dragAndDropMenuInit() {
+    private DragAndDropRequest setParentAndOrderMenuInit() {
         // 최상위 메뉴 생성
         Integer menu1Id = createAndSaveMenu("여성 의류", null, 2);
         Integer menu2Id = createAndSaveMenu("남성 의류", null, 1);
@@ -131,14 +131,14 @@ class MenuServiceTest {
         Menu menu2 = menuRepository.findById(menu2Id).orElse(null);
         Menu menu3 = menuRepository.findById(menu3Id).orElse(null);
 
-        return getDragAndDropRequest(menu1Id, null, null, menu1.getMenuOrder(), menu3.getMenuOrder());
+        return getSetParentAndOrderRequest(menu1Id, null, null, menu1.getMenuOrder(), menu3.getMenuOrder());
     }
 
     @DisplayName("드래그앤 드롭으로 메뉴를 수정한다. 루트에서 하위로 이동.")
     @Transactional
     @Test
-    public void dragAndDrop2() {
-        DragAndDropRequest request = dragAndDropMenuInit2();
+    public void setParentAndOrder2() {
+        DragAndDropRequest request = setParentAndOrderMenuInit2();
 
         menuService.dragAndDrop(request.getId(), request.getOldParent(), request.getNewParent(), request.getOldOrder(), request.getNewOrder());
 
@@ -159,7 +159,7 @@ class MenuServiceTest {
                 .containsExactly("액세서리", "상의", "아우터");
     }
 
-    private DragAndDropRequest dragAndDropMenuInit2() {
+    private DragAndDropRequest setParentAndOrderMenuInit2() {
         // 최상위 메뉴 생성
         Integer menu1Id = createAndSaveMenu("여성 의류", null, 2);
         Integer menu2Id = createAndSaveMenu("남성 의류", null, 1);
@@ -172,14 +172,14 @@ class MenuServiceTest {
         Integer menu4Id = createAndSaveMenu("아우터", menu1, 1);
         Integer menu5Id = createAndSaveMenu("상의", menu1, 0);
 
-        return getDragAndDropRequest(menu3Id, null, menu1Id, menu3.getMenuOrder(), 0);
+        return getSetParentAndOrderRequest(menu3Id, null, menu1Id, menu3.getMenuOrder(), 0);
     }
 
     @DisplayName("드래그앤 드롭으로 메뉴를 수정한다. 루트가 아닌 같은 레벨에서 이동")
     @Transactional
     @Test
-    public void dragAndDrop3() {
-        DragAndDropRequest request = dragAndDropMenuInit3();
+    public void setParentAndOrder3() {
+        DragAndDropRequest request = setParentAndOrderMenuInit3();
 
         menuService.dragAndDrop(request.getId(), request.getOldParent(), request.getNewParent(), request.getOldOrder(), request.getNewOrder());
 
@@ -197,7 +197,7 @@ class MenuServiceTest {
                 .containsExactly("상의", "바지", "양말", "신발", "아우터");
     }
 
-    private DragAndDropRequest dragAndDropMenuInit3() {
+    private DragAndDropRequest setParentAndOrderMenuInit3() {
         // 최상위 메뉴 생성
         Integer menu1Id = createAndSaveMenu("여성 의류", null, 0);
         // 하위 메뉴 생성
@@ -211,14 +211,14 @@ class MenuServiceTest {
 
         Menu menu2 = menuRepository.findById(menu2Id).orElse(null);
 
-        return getDragAndDropRequest(menu2Id, menu1Id, menu1Id, menu2.getMenuOrder(), 4);
+        return getSetParentAndOrderRequest(menu2Id, menu1Id, menu1Id, menu2.getMenuOrder(), 4);
     }
 
     @DisplayName("드래그앤 드롭으로 메뉴를 수정한다. 하위레벨에서 루트로 이동")
     @Transactional
     @Test
-    public void dragAndDrop4() {
-        DragAndDropRequest request = dragAndDropMenuInit4();
+    public void setParentAndOrder4() {
+        DragAndDropRequest request = setParentAndOrderMenuInit4();
 
         menuService.dragAndDrop(request.getId(), request.getOldParent(), request.getNewParent(), request.getOldOrder(), request.getNewOrder());
 
@@ -232,7 +232,7 @@ class MenuServiceTest {
                 .containsExactly("남성 의류", "여성 의류");
     }
 
-    private DragAndDropRequest dragAndDropMenuInit4() {
+    private DragAndDropRequest setParentAndOrderMenuInit4() {
         // 최상위 메뉴 생성
         Integer menu1Id = createAndSaveMenu("여성 의류", null, 0);
         // 하위 메뉴 생성
@@ -247,10 +247,10 @@ class MenuServiceTest {
 
         Menu menu7 = menuRepository.findById(menu7Id).orElse(null);
 
-        return getDragAndDropRequest(menu7Id, menu1Id, null, menu7.getMenuOrder(), 0);
+        return getSetParentAndOrderRequest(menu7Id, menu1Id, null, menu7.getMenuOrder(), 0);
     }
 
-    private DragAndDropRequest getDragAndDropRequest(Integer menuId, Integer oldParentId, Integer newParentId, Integer oldOrder, Integer newOrder) {
+    private DragAndDropRequest getSetParentAndOrderRequest(Integer menuId, Integer oldParentId, Integer newParentId, Integer oldOrder, Integer newOrder) {
         return DragAndDropRequest.builder()
                 .id(menuId)
                 .oldParent(oldParentId)
