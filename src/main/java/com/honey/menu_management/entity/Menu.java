@@ -1,6 +1,5 @@
 package com.honey.menu_management.entity;
 
-import com.honey.menu_management.service.MenuModify;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -43,7 +42,7 @@ public class Menu {
         this.subMenus = subMenus;
     }
 
-    public void dragAndDrop(Menu parent, Integer newOrder) {
+    public void setParentAndOrder(Menu parent, Integer newOrder) {
         this.parent = parent;
         this.menuOrder = newOrder;
     }
